@@ -1,2 +1,2 @@
 require 'simulator'
-require 'pry'
+require 'byebug'
