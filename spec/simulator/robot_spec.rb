@@ -28,6 +28,11 @@ module Simulator
         subject.turn 'left'
         expect(subject.position).to eq(x: 2, y: 2, direction: 'east')
       end
+
+      it 'can turn right' do
+        subject.turn 'right'
+        expect(subject.position).to eq(x: 2, y: 2, direction: 'west')
+      end
     end
 
   end
