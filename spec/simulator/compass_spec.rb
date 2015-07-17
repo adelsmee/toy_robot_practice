@@ -11,7 +11,7 @@ module Simulator
         ['south','east'],
         ['east','north']
       ].each do |from_compass_point, to_compass_point|
-        it 'moves to correct compass direction' do
+        it "moves from #{from_compass_point} to #{to_compass_point}" do
           expect(Compass.rotate(from_compass_point, direction)).to eq to_compass_point
         end
       end
@@ -26,7 +26,7 @@ module Simulator
         ['south','west'],
         ['east','south']
       ].each do |from_compass_point, to_compass_point|
-        it 'moves to correct compass direction' do
+        it "moves from #{from_compass_point} to #{to_compass_point}" do
           expect(Compass.rotate(from_compass_point, direction)).to eq to_compass_point
         end
       end
