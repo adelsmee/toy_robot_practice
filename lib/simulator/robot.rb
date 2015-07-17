@@ -33,25 +33,12 @@ module Simulator
       position.select { |key, value| key.to_s.match /x|y/ }
     end
 
-    def select_direction
-      position.select { |key, value| key.to_s == 'direction' }
+    def current_compass_direction
+      position.select { |key, value| key.to_s == 'direction' }[:direction]
     end
 
-    def calculate_direction direction
-      turn_map[select_direction[:direction].to_sym][direction.to_sym]
-    end
-
-    def turn_map
-      {
-        :north =>
-          {left: 'west', right: 'east'},
-        :south =>
-          {left: 'east', right: 'west'},
-        :east =>
-          {left: 'north', right: 'south'},
-        :west =>
-          {left: 'south', right: 'north'}
-      }
+    def calculate_direction new_direction
+      Compass.rotate(current_compass_direction, new_direction)
     end
   end
 end

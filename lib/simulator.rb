@@ -1,4 +1,5 @@
 module Simulator
 end
 
-require 'robot'
+require 'simulator/robot'
+require 'simulator/compass'
