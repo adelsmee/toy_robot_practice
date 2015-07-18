@@ -48,7 +48,7 @@ module Simulator
       end
 
       it 'can report current position' do
-        expect(subject.position).to eq(x: position_x, y: position_y, direction: position_direction)
+        expect(subject.report).to eq(x: position_x, y: position_y, direction: position_direction)
       end
 
       describe 'moving' do
