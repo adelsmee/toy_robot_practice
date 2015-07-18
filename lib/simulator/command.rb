@@ -32,7 +32,7 @@ module Simulator
         args_hash = parse_place_args args
         validate_coordinates args_hash[:x], args_hash[:y]
         validate_direction args_hash[:direction]
-      rescue Exception => e
+      rescue => e
         # puts e.backtrace
         raise CommandError.new "Invalid PLACE '#{args.upcase}'. #{e.message}"
       end
