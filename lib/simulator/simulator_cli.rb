@@ -6,7 +6,7 @@ module Simulator
     desc 'start', 'Starts the robot simulator'
     # option :debug, :type => :boolean
     def start
-      Simulate.new.start
+      RobotSimulator.new.start
     end
 
     default_task :start

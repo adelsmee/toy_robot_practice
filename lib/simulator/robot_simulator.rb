@@ -5,7 +5,8 @@ module Simulator
       while true
         begin
           command = $stdin.gets.strip
-          puts commander.execute command
+          result = commander.execute command
+          puts result if result
         rescue => e
           puts e.message
           puts e.backtrace
