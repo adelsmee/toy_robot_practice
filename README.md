@@ -10,7 +10,8 @@ Description:
 that would result in the robot falling from the table must be prevented, however further valid movement commands must still
 be allowed.
 
- - Create an application that can read in commands of the following form –
+ - Create an application that can read in commands of the following form
+
 PLACE X,Y,F
 MOVE
 LEFT
@@ -34,24 +35,39 @@ Any move that would cause the robot to fall must be ignored.
 
 Example Input and Output:
 a)
+
 PLACE 0,0,NORTH
+
 MOVE
+
 REPORT
+
 Output: 0,1,NORTH
 
 b)
+
 PLACE 0,0,NORTH
+
 LEFT
+
 REPORT
+
 Output: 0,0,WEST
 
 c)
+
 PLACE 1,2,EAST
+
 MOVE
+
 MOVE
+
 LEFT
+
 MOVE
+
 REPORT
+
 Output: 3,3,NORTH
 
 ### Principles to demonstrate
