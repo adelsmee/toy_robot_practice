@@ -1,4 +1,5 @@
 module Simulator
+  class CommandError < StandardError; end
 end
 
 require 'simulator/command'

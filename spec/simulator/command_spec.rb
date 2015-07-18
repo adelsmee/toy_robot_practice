@@ -6,7 +6,7 @@ module Simulator
       allow(robot).to receive(:place)
       allow(robot).to receive(:move)
       allow(robot).to receive(:turn)
-      allow(robot).to receive(:report)
+      allow(robot).to receive(:report).and_return(x: 1, y: 1, direction: 'north')
     end
 
     subject     { Command.new(robot) }
@@ -33,18 +33,29 @@ module Simulator
           subject.execute "PLACE 0,0,NORTH"
         end
 
-        # formats reports
+        it 'formats REPORT response' do
+          expect(subject.execute('REPORT')).to eq '1,1,NORTH'
+        end
       end
 
-      # context 'when command is invalid' do
-      #   it 'returns "command unknown" message' do
-      #   end
+      context 'when command is invalid' do
+        it 'returns error message when command is unknown' do
+          expect { subject.execute('FIRE LASERS') }.to raise_error CommandError,
+                                                                   "Unknown command 'FIRE LASERS'"
+        end
 
-      #   describe 'without required information' do
-      #     it 'returns error message' do
-      #     end
-      #   end
-      # end
+        it 'returns error message when invalid coordinates are supplied with PLACE command' do
+          expect { subject.execute('PLACE 6,9,SOUTH') }.to raise_error CommandError,
+                                                                   "Invalid PLACE '6,9,SOUTH'. "\
+                                                                   "Coordinates (6,9) are off the table"
+        end
+
+        it 'returns error message when invalid compass direction is supplied with PLACE command' do
+          expect { subject.execute('PLACE 1,2,SOUTH-EAST') }.to raise_error CommandError,
+                                                                   "Invalid PLACE '1,2,SOUTH-EAST'. "\
+                                                                   "'SOUTH-EAST' is not an allowed compass direction"
+        end
+      end
     end
   end
 end

@@ -5,22 +5,56 @@ module Simulator
     end
 
     def execute command
-      case command.downcase!.strip!
-        when 'move', 'report'
+      case command.downcase!.strip
+        when 'move'
           @robot.send command
+        when 'report'
+          format_report @robot.send(command)
         when 'left', 'right'
           @robot.turn command
         when /^place/
-          args = parse_place_args(extract_place_args(command))
-          byebug
-          @robot.place args
+          @robot.place validate_place_args(extract_place_args(command))
+        else
+          raise CommandError.new "Unknown command '#{command.upcase}'"
       end
     end
 
     private
+
+    def format_report position
+      "#{position[:x]},#{position[:y]},#{position[:direction].upcase}"
+    end
+
+    def validate_place_args args
+      args_hash = {}
+
+      begin
+        args_hash = parse_place_args args
+        validate_coordinates args_hash[:x], args_hash[:y]
+        validate_direction args_hash[:direction]
+      rescue Exception => e
+        # puts e.backtrace
+        raise CommandError.new "Invalid PLACE '#{args.upcase}'. #{e.message}"
+      end
+
+      args_hash
+    end
+
+    def validate_coordinates x_coordinate, y_coordinate
+      unless Table.has_square? x: x_coordinate, y: y_coordinate
+        raise "Coordinates (#{x_coordinate},#{y_coordinate}) are off the table"
+      end
+    end
+
+    def validate_direction direction
+      unless Compass::DIRECTIONS.include? direction
+        raise "'#{direction.upcase}' is not an allowed compass direction"
+      end
+    end
+
     def parse_place_args args
       values = args.split(',')
-      { x: values[0], y: values[1], direction: values[2] }
+      { x: Integer(values[0]), y: Integer(values[1]), direction: values[2] }
     end
 
     def extract_place_args place_command
