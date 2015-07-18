@@ -22,9 +22,9 @@ module Simulator
 
       [
         ['north','east'],
-        ['west','north'],
+        ['east','south'],
         ['south','west'],
-        ['east','south']
+        ['west','north']
       ].each do |from_compass_point, to_compass_point|
         it "moves from #{from_compass_point} to #{to_compass_point}" do
           expect(Compass.rotate(from_compass_point, direction)).to eq to_compass_point
