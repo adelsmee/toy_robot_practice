@@ -46,7 +46,8 @@ module Simulator
     def calculate_coordinates
       current_position = current_coordinates
       new_position_key = current_compass_direction.match(/north|south/) ? 'y' : 'x'
-      new_position_value = current_position[new_position_key.to_sym] + 1
+      new_position_offset = current_compass_direction.match(/north|east/) ? 1 : -1
+      new_position_value = current_position[new_position_key.to_sym] + new_position_offset
       current_position.merge! new_position_key.to_sym => new_position_value
     end
 

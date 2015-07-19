@@ -54,18 +54,40 @@ module Simulator
       describe 'moving' do
         describe 'to another square on the table' do
           describe 'on the y axis' do
-            it 'changes position' do
-              subject.move
-              expect(subject.position).to eq(x: position_x, y: (position_y + 1), direction: position_direction)
+            context 'when facing north' do
+              it 'moves up' do
+                subject.move
+                expect(subject.position).to eq(x: position_x, y: (position_y + 1), direction: position_direction)
+              end
+            end
+
+            context 'when facing south' do
+              let(:position_direction) { 'south' }
+
+              it 'moves down' do
+                subject.move
+                expect(subject.position).to eq(x: position_x, y: (position_y - 1), direction: position_direction)
+              end
             end
           end
 
           describe 'on the x axis' do
-            let(:position_direction) { 'east' }
+            context 'when facing east' do
+              let(:position_direction) { 'east' }
 
-            it 'changes position' do
-              subject.move
-              expect(subject.position).to eq(x: (position_x + 1), y: position_y, direction: position_direction)
+              it 'moves right' do
+                subject.move
+                expect(subject.position).to eq(x: (position_x + 1), y: position_y, direction: position_direction)
+              end
+            end
+
+            context 'when facing west' do
+              let(:position_direction) { 'west' }
+
+              it 'moves left' do
+                subject.move
+                expect(subject.position).to eq(x: (position_x - 1), y: position_y, direction: position_direction)
+              end
             end
           end
         end
