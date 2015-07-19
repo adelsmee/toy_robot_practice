@@ -1,15 +1,19 @@
 module Simulator
   class Command
-    def initialize robot
+    def initialize robot, debug=false
       @robot = robot
+      @debug = debug
     end
 
     def execute command
-      case command.downcase!.strip
+      command = command.downcase
+      response = ''
+
+      case command
         when 'move'
           @robot.send command
         when 'report'
-          format_report @robot.send(command)
+          response = format_report @robot.send(command)
         when 'left', 'right'
           @robot.turn command
         when /^place/
@@ -17,6 +21,8 @@ module Simulator
         else
           raise CommandError.new "Unknown command '#{command.upcase}'"
       end
+      return [response, @robot.position].reject { |item| item.nil? || item == '' } if @debug
+      return response unless response.empty?
     end
 
     private
@@ -33,7 +39,6 @@ module Simulator
         validate_coordinates args_hash[:x], args_hash[:y]
         validate_direction args_hash[:direction]
       rescue => e
-        # puts e.backtrace
         raise CommandError.new "Invalid PLACE '#{args.upcase}'. #{e.message}"
       end
 

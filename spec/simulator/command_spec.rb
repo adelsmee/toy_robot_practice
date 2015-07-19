@@ -7,6 +7,7 @@ module Simulator
       allow(robot).to receive(:move)
       allow(robot).to receive(:turn)
       allow(robot).to receive(:report).and_return(x: 1, y: 1, direction: 'north')
+      allow(robot).to receive(:position).and_return(x: 2, y: 2, direction: 'east')
     end
 
     subject     { Command.new(robot) }
@@ -55,6 +56,14 @@ module Simulator
                                                                    "Invalid PLACE '1,2,SOUTH-EAST'. "\
                                                                    "'SOUTH-EAST' is not an allowed compass direction"
         end
+      end
+    end
+
+    context 'when debug flag is set' do
+      subject { Command.new(robot, true) }
+
+      it 'prints position after command is executed' do
+        expect(subject.execute('MOVE')).to include(x: 2, y: 2, direction: 'east')
       end
     end
   end
