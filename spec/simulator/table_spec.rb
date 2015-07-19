@@ -8,7 +8,7 @@ module Simulator
       end
 
       it 'returns false for non-existent square' do
-        expect(Table.has_square?(x: 100, y: 100)).to be false
+        expect(Table.has_square?(x: -1, y: -1)).to be false
       end
     end
   end

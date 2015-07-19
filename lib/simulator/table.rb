@@ -3,7 +3,12 @@ module Simulator
     class << self
 
       def has_square? coordinates
-        return false if grid[coordinates[:x]].nil? || grid[coordinates[:x]][coordinates[:y]].nil?
+        if coordinates[:x] < 0        ||
+           coordinates[:y] < 0        ||
+           grid[coordinates[:x]].nil? ||
+           grid[coordinates[:x]][coordinates[:y]].nil?
+          return false
+        end
         true
       end
 
