@@ -23,6 +23,8 @@ bundle exec rspec spec
 bin/simulator
 # To help troubleshoot use the debug flag
 bin/simulator --debug
+
+# For convenience once you have finished simulating your robot type QUIT to end
 ```
 
 ### Toy Robot Problem
