@@ -6,6 +6,7 @@ Get into training for the job hunt
 #### Prereqs
 
 Developed using Ruby 2.1.5
+
 You'll need bundler ```gem install bundler```
 
 ```
