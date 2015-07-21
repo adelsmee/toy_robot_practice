@@ -21,6 +21,8 @@ bundle exec rspec spec
 
 # Run the application providing input from STDIN
 bin/simulator
+# To help troubleshoot use the debug flag
+bin/simulator --debug
 ```
 
 ### Toy Robot Problem
