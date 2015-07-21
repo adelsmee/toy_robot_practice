@@ -1,13 +1,13 @@
 # Toy Robot Practice Test
 Get into training for the job hunt
 
-### Usage
-
 #### Prereqs
 
 Developed using Ruby 2.1.5
 
 You'll need bundler ```gem install bundler```
+
+### Usage
 
 ```
 # Clone the repo
