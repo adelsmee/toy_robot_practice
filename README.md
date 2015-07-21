@@ -1,6 +1,27 @@
 # Toy Robot Practice Test
 Get into training for the job hunt
 
+### Usage
+
+#### Prereqs
+
+Developed using Ruby 2.1.5
+You'll need bundler ```gem install bundler```
+
+```
+# Clone the repo
+git clone git@github.com:adelsmee/toy_robot_practice.git
+
+# Install dependencies
+bundle install
+
+# Run the specs
+bundle exec rspec spec
+
+# Run the application providing input from STDIN
+bin/simulator
+```
+
 ### Toy Robot Problem
 
 Description:
