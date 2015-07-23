@@ -2,6 +2,16 @@ require 'spec_helper'
 
 module Simulator
   describe Table do
+    before(:each) do
+      Table.reset!
+    end
+
+    context 'map' do
+      it 'returns the entire table grid' do
+        expect(Table.map).to eq([[0] * Table::WIDTH] * Table::HEIGHT)
+      end
+    end
+
     context 'has_square?' do
       it 'returns true for existing square' do
         expect(Table.has_square?(x: 1, y: 1)).to be true
