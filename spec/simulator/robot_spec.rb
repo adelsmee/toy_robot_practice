@@ -29,9 +29,18 @@ module Simulator
         subject.turn 'left'
         expect(subject.position).to be_nil
       end
+
+      it 'ignores a place_object command' do
+        subject.place_object
+        expect(subject.position).to be_nil
+      end
     end
 
     context 'when robot is on the table' do
+      before(:each) do
+        allow(Table).to receive(:place_object)
+      end
+
       let(:subject)            { Robot.new.tap { |robot| robot.place(x: position_x, y: position_y, direction: position_direction) } }
       let(:position_x)         { 2 }
       let(:position_y)         { 2 }
@@ -53,7 +62,7 @@ module Simulator
 
       it 'can place an object' do
         subject.place_object
-        expect(Table.has_object?(x: position_x, y: position_y + 1)).to be true
+        expect(Table).to have_received(:place_object).with(x: position_x, y: position_y + 1)
       end
 
       describe 'moving' do

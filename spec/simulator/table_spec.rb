@@ -30,8 +30,14 @@ module Simulator
 
     context 'place_object' do
       it 'places an object on the specified coordinates' do
-        Table.place_object x: 3, y: 3
-        expect(Table.has_object?(x: 3, y: 3)).to be true
+        Table.place_object x: 2, y: 1
+        expect(Table.map).to eq [
+                                  [0,0,0,0,0],
+                                  [0,0,0,0,0],
+                                  [0,0,0,0,0],
+                                  [0,0,Table::OBJECT_MARKER,0,0],
+                                  [0,0,0,0,0]
+                                ]
       end
     end
   end

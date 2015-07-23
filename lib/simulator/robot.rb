@@ -25,6 +25,8 @@ module Simulator
     alias_method :report, :position
 
     def place_object
+      return unless on_table?
+
       Table.place_object calculate_coordinates
     end
 
@@ -45,6 +47,7 @@ module Simulator
       select_xy position
     end
 
+    # calculates coordinates directly in front of robot
     def calculate_coordinates
       current_position = current_coordinates
       new_position_key = current_compass_direction.match(/north|south/) ? 'y' : 'x'
