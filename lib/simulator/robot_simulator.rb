@@ -29,6 +29,7 @@ module Simulator
        Valid commands:
        PLACE 0,0,NORTH - Places the robot on the table at grid coordinates specified.
        Valid grid coordinates 0 - 4. **Note** This must be the first command.
+       PLACE_OBJECT - Places an object one square in front of the robot.
        MOVE - Moves the robot forward one square in whichever direction it is facing.
        LEFT - Turns the robot one compass point to the left.
        RIGHT - Turns the robot one compass point to the right.

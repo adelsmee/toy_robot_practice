@@ -51,6 +51,11 @@ module Simulator
         expect(subject.report).to eq(x: position_x, y: position_y, direction: position_direction)
       end
 
+      it 'can place an object' do
+        subject.place_object
+        expect(Table.has_object?(x: position_x, y: position_y + 1)).to be true
+      end
+
       describe 'moving' do
         describe 'to another square on the table' do
           describe 'on the y axis' do

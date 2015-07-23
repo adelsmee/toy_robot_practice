@@ -10,13 +10,13 @@ module Simulator
       response = ''
 
       case command
-        when 'move'
+        when 'move', 'place_object'
           @robot.send command
         when 'report'
           response = format_report @robot.send(command)
         when 'left', 'right'
           @robot.turn command
-        when /^place/
+        when /^place /
           @robot.place validate_place_args(extract_place_args(command))
         else
           raise CommandError.new "Unknown command '#{command.upcase}'"

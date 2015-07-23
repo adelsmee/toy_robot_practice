@@ -24,6 +24,10 @@ module Simulator
 
     alias_method :report, :position
 
+    def place_object
+      Table.place_object calculate_coordinates
+    end
+
     private
     def on_table?
       not position_log.empty?

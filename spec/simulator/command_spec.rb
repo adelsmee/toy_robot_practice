@@ -6,6 +6,7 @@ module Simulator
       allow(robot).to receive(:place)
       allow(robot).to receive(:move)
       allow(robot).to receive(:turn)
+      allow(robot).to receive(:place_object)
       allow(robot).to receive(:report).and_return(x: 1, y: 1, direction: 'north')
       allow(robot).to receive(:position).and_return(x: 2, y: 2, direction: 'east')
     end
@@ -15,7 +16,7 @@ module Simulator
 
     describe 'execute' do
       context 'when command is valid' do
-        ['MOVE','REPORT'].each do |command|
+        ['MOVE','REPORT','PLACE_OBJECT'].each do |command|
           it "sends #{command} command to object" do
             expect(robot).to receive(command.downcase.to_sym)
             subject.execute command
