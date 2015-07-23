@@ -62,19 +62,17 @@ module Simulator
           end
         end
 
-        xcontext 'when command errors' do
+        context 'when command errors' do
           before(:each) do
-            STDIN.stub(:gets).and_return('MOVE','QUIT')
+            STDIN.stub(:gets).and_return('BITE ME','QUIT')
             allow(subject).to receive(:commander).and_return robot_commander
-            allow(fake_error).to receive(:backtrace)
-            allow(robot_commander).to receive(:execute).and_raise(fake_error)
-            subject.start true
+            allow_any_instance_of(CommandError).to receive(:backtrace)
+            allow(robot_commander).to receive(:execute).and_raise CommandError
           end
 
-          let(:fake_error) { class FakeError < StandardError; end }
-
           it 'prints backtrace' do
-            expect(fake_error).to have_received(:backtrace)
+            expect_any_instance_of(CommandError).to receive(:backtrace)
+            subject.start(true) rescue nil
           end
         end
       end

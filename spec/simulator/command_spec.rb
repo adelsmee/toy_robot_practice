@@ -9,10 +9,11 @@ module Simulator
       allow(robot).to receive(:place_object)
       allow(robot).to receive(:report).and_return(x: 1, y: 1, direction: 'north')
       allow(robot).to receive(:position).and_return(x: 2, y: 2, direction: 'east')
+      allow(Table).to receive(:map).and_return([[0] * 2] * 2)
     end
 
     subject     { Command.new(robot) }
-    let(:robot) { double }
+    let(:robot) { instance_double(Robot) }
 
     describe 'execute' do
       context 'when command is valid' do
@@ -37,6 +38,11 @@ module Simulator
 
         it 'formats REPORT response' do
           expect(subject.execute('REPORT')).to eq '1,1,NORTH'
+        end
+
+
+        it 'formats MAP response' do
+          expect(subject.execute('MAP')).to eq "00\n00"
         end
       end
 
