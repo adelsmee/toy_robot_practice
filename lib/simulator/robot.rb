@@ -1,15 +1,15 @@
 module Simulator
   class Robot
     def place new_position
-      new_square = select_xy new_position
-      change_position new_position if Table.has_square? new_square
+      new_coordinates = select_xy new_position
+      change_position new_position if Table.has_square? new_coordinates
     end
 
     def move
       return unless on_table?
 
-      new_square = calculate_coordinates
-      change_position new_square.merge!(direction: current_compass_direction) if Table.has_square? new_square
+      new_coordinates = calculate_coordinates
+      change_position new_coordinates.merge!(direction: current_compass_direction) if Table.has_square? new_coordinates
     end
 
     def turn direction
