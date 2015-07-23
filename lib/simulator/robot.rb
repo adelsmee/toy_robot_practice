@@ -18,13 +18,11 @@ module Simulator
       change_position current_coordinates.merge!(direction: calculate_direction(direction))
     end
 
-    def report
-      position
-    end
-
     def position
       position_log.last
     end
+
+    alias_method :report, :position
 
     private
     def on_table?
