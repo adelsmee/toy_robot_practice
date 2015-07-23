@@ -18,17 +18,29 @@ module Simulator
           @robot.turn command
         when /^place /
           @robot.place validate_place_args(extract_place_args(command))
+        when 'map'
+          response = format_map Table.map
         else
           raise CommandError.new "Unknown command '#{command.upcase}'"
       end
-      return [response, @robot.position].reject { |item| item.nil? || item == '' } if @debug
-      return response unless response.empty?
+
+      format_response response
     end
 
     private
 
+    def format_response response
+      return response unless @debug
+
+      [response, @robot.position].reject { |item| item.nil? || item == '' }
+    end
+
     def format_report position
       "#{position[:x]},#{position[:y]},#{position[:direction].upcase}"
+    end
+
+    def format_map map
+      map.map { |e| e.join("") }.join("\n")
     end
 
     def validate_place_args args

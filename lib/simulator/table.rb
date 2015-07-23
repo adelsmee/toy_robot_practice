@@ -17,25 +17,31 @@ module Simulator
       end
 
       def place_object coordinates
-        grid[coordinates[:x]][coordinates[:y]] = OBJECT_MARKER
+        return unless has_square? coordinates
+        grid[coordinates[:y]][coordinates[:x]] = OBJECT_MARKER
       end
 
       def has_object? coordinates
-        return (grid[coordinates[:x]][coordinates[:y]] == OBJECT_MARKER)
+        return (grid[coordinates[:y]][coordinates[:x]] == OBJECT_MARKER)
       end
 
       def map
-        grid
+        grid.reverse
       end
 
       def reset!
-        @grid = [[0] * WIDTH] * HEIGHT
+        @grid = grid_array
       end
 
       private
 
       def grid
-        @grid ||= [[0] * WIDTH] * HEIGHT
+        @grid ||= grid_array
+      end
+
+      def grid_array
+        grid = [[0] * 5] * 5
+        grid.map! { |item| item.clone }
       end
 
     end
